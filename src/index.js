@@ -1,17 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+import ReactDom from 'react-dom';
+//import Main from './components/main';
+import './styles/stylesheet.css';
+import {BrowserRouter} from 'react-router-dom';
+import {applyMiddleware, createStore,compose} from 'redux';
+import rootReducer from './redux/reducer';
+import {Provider} from 'react-redux';
+import App from './components/app';
+import thunk from 'redux-thunk';
+import {database} from './database/config'
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(rootReducer,composeEnhancer(applyMiddleware(thunk)));
+
+//const tasks =['task1','task2','task3'];
+
+//const element = React.createElement('ol',null, tasks.map((task,index)=>React.createElement('li',{key:index},task)));
+
+// const element = 
+//     <div>
+//         <h1>Header of the list</h1>
+//         <ol>
+//             {tasks.map((task,index)=> <li key = {index} >{task}</li>)}    
+//         </ol>
+//     </div>    
+
+
+ReactDom.render(<Provider store ={store}><BrowserRouter><App/></BrowserRouter></Provider>,document.getElementById('root'));
