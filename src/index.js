@@ -6,7 +6,7 @@ import {BrowserRouter} from 'react-router-dom';
 import {applyMiddleware, createStore,compose} from 'redux';
 import rootReducer from './redux/reducer';
 import {Provider} from 'react-redux';
-import App from './components/app';
+import App from './Components/App';
 import thunk from 'redux-thunk';
 import {database} from './database/config'
 
